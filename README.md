@@ -1,30 +1,32 @@
-# Invoice Parser Agent 📑
+# Structured Data Extractor
 
-AI-powered engine to extract structured data (Order JSON) from raw email text or invoices. Built with FastAPI and `instructor`.
+AI agent converting unstructured text/emails into validated JSON orders using Pydantic & Instructor.
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
-1.  **Environment Variables**
-    ```bash
-    cp .env.example .env
-    ```
-    *Fill in your `OPENAI_API_KEY` in the `.env` file.*
+1. **Environment Variables**
+   ```bash
+   cp .env.example .env
+   ```
+   Fill in your `OPENAI_API_KEY` in the `.env` file.
 
-2.  **Install Dependencies**
-    ```bash
-    uv sync
-    ```
+2. **Install Dependencies**
+   ```bash
+   uv sync
+   ```
 
-## 🚀 Running the App
+## Running the App
 
-Run the server on port **8001** (to avoid conflict with hybrid-core):
+Run the server on port 8001 (to avoid conflict with other services):
+
 ```bash
 uv run uvicorn main:app --port 8001 --reload
 ```
 
-## 🧪 Testing the API
+## Testing the API
 
-### 1. Parse Order (AI Extraction)
+### Parse Order (AI Extraction)
+
 Extracts structured JSON from unstructured text.
 
 **Request:**
