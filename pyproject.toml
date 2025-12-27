@@ -1,7 +1,7 @@
 [project]
 name = "ai-automation-agent-invoice-parser"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI agent converting unstructured text/emails into validated JSON orders using Pydantic & Instructor."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
