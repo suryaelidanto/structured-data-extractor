@@ -1,14 +1,29 @@
 [project]
-name = "ai-automation-agent-invoice-parser"
+name = "structured-data-extractor"
 version = "0.1.0"
-description = "AI agent converting unstructured text/emails into validated JSON orders using Pydantic & Instructor."
+description = "AI-powered engine to transform unstructured text into validated order schemas"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "dotenv>=0.9.9",
-    "fastapi>=0.126.0",
-    "instructor>=1.13.0",
-    "openai>=2.13.0",
-    "pydantic>=2.12.5",
-    "uvicorn>=0.38.0",
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "instructor>=1.0.0",
+    "openai>=1.15.0",
+    "python-dotenv>=1.0.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.2.0",
+    "httpx>=0.26.0",
+    "pre-commit>=3.6.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

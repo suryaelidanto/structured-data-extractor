@@ -1,54 +1,74 @@
 # Structured Data Extractor
 
-AI agent converting unstructured text/emails into validated JSON orders using Pydantic & Instructor.
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Setup & Installation
+An AI-powered microservice designed to transform unstructured text (emails, invoices, chat logs) into strictly validated, structured data schemas.
 
-1. **Environment Variables**
-   ```bash
-   cp .env.example .env
-   ```
-   Fill in your `OPENAI_API_KEY` in the `.env` file.
+## Features
+- **Schema Enforcement**: Uses Pydantic V2 to ensure parsed data matches your business rules.
+- **Smart Parsing**: Powered by GPT-4o-mini and `instructor` for high-accuracy extraction.
+- **Input Validation**: Custom Pydantic validators to catch logical errors (e.g., negative quantities).
+- **Production Infrastructure**: Built-in Docker, Makefile, and CI/CD support.
 
-2. **Install Dependencies**
-   ```bash
-   uv sync
-   ```
+---
 
-## Running the App
+## Prerequisites
+- **Python**: 3.10+
+- **UV**: Fast Python package manager
+- **OpenAI API Key**: Required for the parsing engine
 
-Run the server on port 8001 (to avoid conflict with other services):
+---
 
-```bash
-uv run uvicorn main:app --port 8001 --reload
+## Usage
+
+### 1. Configuration
+Create a `.env` file:
+```text
+OPENAI_API_KEY=sk-...
 ```
 
-## Testing the API
-
-### Parse Order (AI Extraction)
-
-Extracts structured JSON from unstructured text.
-
-**Request:**
+### 2. Run API
 ```bash
-curl -X POST "http://localhost:8001/parse-order" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "text": "Dear Admin, please send me 3 units of MacBook Pro M3. I need it by tomorrow, so please use Overnight shipping. My name is Alex from TechCorp."
-     }'
+make dev
 ```
+Access the interactive documentation at `http://localhost:8000/docs`.
 
-**Response:**
+### 3. API Scenarios
+
+#### Scenario: Extracting Order from Email
+**Request:** `POST /parse-order`
 ```json
 {
-  "customer_name": "Alex from TechCorp",
+  "text": "Hi, I'm John. I want to buy 3 mechanical keyboards and I need express shipping. Please leave it at the front door."
+}
+```
+**Output:**
+```json
+{
+  "customer_name": "John",
   "items": [
     {
-      "product_name": "MacBook Pro M3",
+      "product_name": "mechanical keyboards",
       "quantity": 3
     }
   ],
-  "shipping": "overnight",
-  "notes": null
+  "shipping": "express",
+  "notes": "Please leave it at the front door."
 }
 ```
+
+---
+
+## Roadmap
+- [x] Order extraction logic with Pydantic validation.
+- [x] FastAPI modularization.
+- [ ] Multi-document support (Batch parsing).
+- [ ] Table extraction from raw text/markdown.
+
+---
+
+## Development
+- **Linting**: `make lint`
+- **Testing**: `make test`
+- **Docker**: `make up`
