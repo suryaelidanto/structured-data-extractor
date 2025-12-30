@@ -3,6 +3,10 @@ import instructor
 from openai import OpenAI
 from app.models import OrderExtraction
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 client = instructor.from_openai(OpenAI(api_key=os.getenv("OPENAI_API_KEY")))
 
 

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
-from app.models import ParseRequest, OrderExtraction
+from app.models import OrderExtraction, ParseRequest
 from app.services import parse_order_from_text
+
 
 app = FastAPI(
     title="Structured Data Extractor API",
